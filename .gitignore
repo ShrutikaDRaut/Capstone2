@@ -1,0 +1,17 @@
+*.log
+*.pyc
+*.pot
+__pycache__/
+.idea
+.venv
+db.sqlite3
+.gitlab-ci.yml
+local_settings.py
+teenagerstartups/settings.py
+publicsite/templates/robots.txt
+staticfiles/
+media/
+*.code-workspace
+Pipfile
+.vscode
+.DS_Store
