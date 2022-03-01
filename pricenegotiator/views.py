@@ -22,4 +22,5 @@ def home(request):
             item.category_Name = products.iloc[product, 7]
             item.product_Img_url = products.iloc[product, 8]
             item.save()
-    return render(request, 'index.html')
+    all_products = Product.objects.all()
+    return render(request, 'index.html', {'products': all_products})
