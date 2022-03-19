@@ -8,26 +8,28 @@ Original file is located at
 """
 
 # Import random/uniform, to generate random float within range
-from random import uniform
+from random import uniform, random
 
 # Takes 5% of value passed, to create range buffer
 inputBuffer = lambda val: val % 5
 
+
 # Negotiation logic
 def bargainAmt(min, max, userAmt):
-  print(min, max, userAmt)
-  offerAmt = 0.0
-  if userAmt >= min:
-    incr = inputBuffer(userAmt) + userAmt
-    if incr >= max:
-      decr = max - inputBuffer(max)
-      offerAmt = round(random.uniform(decr, max), 2)
+    print(min, max, userAmt)
+    offerAmt = 0.0
+    if userAmt >= min:
+        incr = inputBuffer(userAmt) + userAmt
+        if incr >= max:
+            decr = max - inputBuffer(max)
+            offerAmt = round(random.uniform(decr, max), 2)
+        else:
+            offerAmt = round(random.uniform(incr, max), 2)
     else:
-      offerAmt = round(random.uniform(incr, max), 2)
-  else:
-    incr = inputBuffer(min) + min
-    offerAmt = round(random.uniform(incr, max), 2)
-  return offerAmt
+        incr = inputBuffer(min) + min
+        offerAmt = round(random.uniform(incr, max), 2)
+    return offerAmt
+
 
 # Method implementation
 

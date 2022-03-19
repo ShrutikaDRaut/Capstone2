@@ -1,112 +1,161 @@
-version: "3.0"
+ version: "3.0"
+ 
+ nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - good morning
+      - good evening
+      - hey there
+      - yo
 
-nlu:
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you around
+      - see you later
+      - Ciao
+      - later
 
-- intent: goodbye
-  examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+  - intent: affirm
+    examples: |
+      - yes
+      - indeed
+      - of course
+      - that sounds good
+      - correct
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+  - intent: deny
+    examples: |
+      - no
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
 
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+  - intent: mood_great
+    examples: |
+      - perfect
+      - very good
+      - great
+      - amazing
+      - wonderful
+      - I am feeling very good
+      - I am great
+      - I'm good
 
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+  - intent: mood_unhappy
+    examples: |
+      - sad
+      - very sad
+      - unhappy
+      - bad
+      - very bad
+      - awful
+      - terrible
+      - not very good
+      - extremely sad
+      - so sad
 
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
 
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+  - intent: demand_joke
+    examples: |
+      - got a pokemon gag?
+      - could you tell me a joke?
+      - please give me a funny
+      - know any good pokemon puns?
+      - give me a wisecracker
+      - tell me of a good antic
+      - tell me a joke
+      - no, i want to hear a joke
+      - tell me another joke
+      - give me another one
+      - give me a good pokemon joke
+      - give me another joke
+      - oke, make me laugh one more time
+      - make me laugh
 
+  # - intent: confirm_exists
+  #   examples: |
+  #     - is [bulbasaur](pokemon_name) a pokemon
+  #     - does [ninetails](pokemon_name) exist
+  #     - ever heard of [pikachu](pokemon_name)
+  #     - are [pikachu](pokemon_name) and [charmander](pokemon_name) pokemon?
+  #     - is [rasa](pokemon_name) a pokemon?
+  #     - hey is [rasa](pokemon_name) a pokemon?
+  #     - are [pichuka](pokemon_name) and [charmander](pokemon_name) pokemon?
+  #     - are [snorlax](pokemon_name), [gariddos](pokemon_name) and [dittto](pokemon_name) pokemon?
+  # - intent: faq/what_is_pokemon
+  #   examples: |
+  #     - what is pokemon?
+  #     - can you tell me what pokemon is?
 
-Chatbot: Hi,Did you want to negotiate?
-User: Hello, I want to pay 200$
-Chatbot: Sorry, we can give you at 300$
-User: 250 then
-Chatbot: Ok
+  # - intent: faq/how_many
+  #   examples: |
+  #     - how many pokemon are there?
+  #     - are there a lot of pokemon?
 
+  # - intent: faq/ask_berries
+  #   examples: |
+  #       - what are pokemon berries?
+  #       - tell me about pokemon berries
+  #       - what are berries?
+  #       - what about these berries?
 
-DisplaY: 500
-Min: 300
+  # - intent: faq/pokemon_history
+  #   examples: |
+  #     - when was Pokemon created?
+  #     - who created Pokemon?
+  #     - what's the history of Pokemon?
 
-User: 200
-Reply: 450
+  # - intent: query_knowledge_base
+  #   examples: |
+  #     - mention a few [pokemons]{"entity": "object_type", "value": "pokemon"}.
+  #     - give me some random [pokemons]{"entity": "object_type", "value": "pokemon"}.
+  #     - what are some [pokemons]{"entity": "object_type", "value": "pokemon"}?
+  #     - can you give examples of [pokemons]{"entity": "object_type", "value": "pokemon"}?
 
-User: 350
-Reply: 350 + 20%
+  - intent: set_prices
+    examples: |
+      - prices: [199.00](min_price) [399.00](max_price)
+      - prices: [1000](min_price) [10000](max_price)
+      - prices: [800](min_price) [2000](max_price)
+      - prices: [1500](min_price) [4500](max_price)
+    
+  - intent: user_counter_offer
+    examples: |
+      - [400](user_offer)
+      - [400](user_offer) bucks
+      - [400](user_offer) dollars
+      - I bid at [400](user_offer) dollars
+      - My offer is [400](user_offer) dollars
+      - I want at [400](user_offer) dollars
 
-def calculate_response(min, max, user_offer):
-    Logic
-    return int
+  - intent: user_reply_offer
+    examples: |
+      - [Y](accept_offer)
+      - [N](accept_offer)
+      - [y](accept_offer)
+      - [n](accept_offer)
+
+  # - synonym: pokemon
+  #   examples: |
+  #     - pokemons
+
+  # - lookup: pokemon_name
+  #   examples: | 
+  #     - slowpoke
+  #     - slowbro
+  #     - magnemite
+
+  

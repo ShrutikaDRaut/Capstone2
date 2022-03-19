@@ -1,34 +1,97 @@
 version: "3.0"
 
+actions:
+- action_check_existence
+- action_query_knowledge_base
+- action_counter_offer
+- action_reject_accept_offer
+- respond_faq
+- utter_cheer_up
+- utter_did_that_help
+- utter_goodbye
+- utter_greet
+- utter_happy
+- utter_iamabot
+- utter_joke
+- utter_ask_initial_offer
+- utter_ask_accept_offer
+entities:
+- attribute
+- mention
+- min_price
+- max_price
+- user_offer
+- accept_offer
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
+- confirm_exists
+- greet
+- faq
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- demand_joke
+- query_knowledge_base
+- set_prices
+- user_counter_offer
+- user_reply_offer
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: Here is something to cheer you up
   utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
+  - text: Did that help you?
   utter_goodbye:
-  - text: "Bye"
-
+  - text: Bye
+  utter_greet:
+  - text: Hey! How are you?
+  utter_happy:
+  - text: Great, carry on!
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: I am a bot, powered by Rasa.
+  utter_joke:
+  - text: Are you sure you can handle my jokes? You might laugh your Ash off.
+  - text: Why did the Squirtle cross the road? To get to the other tide!
+  - text: What appears over Ash’s head when he gets an idea? A LightBulbasaur
+  - text: Where did Brock take Nurse Joy for a date? The PokeBall
+  - text: What’s better than one Pikachu? PikaTWO
+  - text: What does Moeowth see when it looks in the mirror? A copy-cat!
+  - text: When does a Gastly eat breakfast? In the moaning.
+  - text: Which Pokemon does Dracula like most? Koffin'
+  - text: What's everybody's favorite dance in the Pokemon world? The PokeBall!
+  - text: I absol-utely love Pokemon!
+  - text: Check the laundry, I found one of your Sawk.
+  utter_ask_initial_offer:
+  - text: Hey, how are you? What is your offer today?
+  - text: Hey, please provide a counter offer for your basket.
+  - text: Let's make a deal, how much are you willing to pay?
+  utter_ask_accept_offer:
+  - text: Do you accept our counter-offer? (Y/N)
+  - text: Does our offer work for you? (Y/N)
+  - text: Agree to price? (Y/N)
+
 
 session_config:
-  session_expiration_time: 60
   carry_over_slots_to_new_session: true
+  session_expiration_time: 60
+slots:
+  min_price:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: min_price
+  max_price:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: max_price
+  user_offer:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: user_offer
+
+
+
