@@ -11,17 +11,46 @@
   - intent: user_made_offer
     examples: |
       - [400](user_offer)
+      - [100.02]
+      - [1000] 
+      - [1000] Dollar
 
   - intent: user_offer_accepted
     examples: |
       - yes
+      - ok confirmed
+      - done
+      - ok done
+      - accepted
+      - ready
+      - fine
+      - deal
+      - agree
+      - final
+      - interested
 
   - intent: user_offer_denied
     examples: |
       - no
+      - never
+      - deny
+      - reject
+      - not interested
+      - not agree
+      - try again
+      - later
+      - try
+
+
   - intent: user_end
     examples: |
       - thank you
+      - thanks
+      - ty
+      - tnx
+      - bye
+      - end
+      - over
 
   - intent: user_random
     examples: |
