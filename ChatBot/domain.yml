@@ -1,0 +1,60 @@
+version: "3.0"
+
+actions:
+#- utter_ask_approval
+- utter_ask_new_offer
+- utter_chat_begin
+- utter_counter_offer
+- utter_congrats
+- utter_thankyou
+entities:
+- attribute
+- mention
+- min_price
+- max_price
+- user_offer
+- accept_offer
+intents:
+- user_made_offer
+- user_offer_accepted
+- user_offer_denied
+- user_initiate_chat
+- user_end
+- user_random
+responses:
+  #utter_ask_approval:
+  #- text: Does our offer work for you? (Y/N)
+  utter_ask_new_offer:
+  - text: Shoot me a new offer!
+  utter_chat_begin:
+  - text: Hey! Do you want to make an offer? Hit me a number to bargain. 
+  utter_counter_offer:
+  - text: Hey! we would like to offer you at 150$ less price. Does our offer work for you?
+  utter_congrats:
+  - text: Congratulations! You can go to check out page for final purchase.
+  utter_thankyou:
+  - text: It was pleasure talking to you. Have a great day!
+
+
+session_config:
+  carry_over_slots_to_new_session: true
+  session_expiration_time: 60
+slots:
+  min_price:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: min_price
+  max_price:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: max_price
+  user_offer:
+    type: float
+    mappings:
+        - type: from_entity
+          entity: user_offer
+
+
+
