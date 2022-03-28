@@ -1,0 +1,28 @@
+ version: "3.0"
+ 
+ nlu:
+  - intent: user_initiate_chat
+    examples: |
+      - prices: [199.00](min_price) [399.00](max_price)
+      - prices: [1000](min_price) [10000](max_price)
+      - prices: [800](min_price) [2000](max_price)
+      - prices: [1500](min_price) [4500](max_price)
+
+  - intent: user_made_offer
+    examples: |
+      - [400](user_offer)
+
+  - intent: user_offer_accepted
+    examples: |
+      - yes
+
+  - intent: user_offer_denied
+    examples: |
+      - no
+  - intent: user_end
+    examples: |
+      - thank you
+
+  - intent: user_random
+    examples: |
+      - this is random chat

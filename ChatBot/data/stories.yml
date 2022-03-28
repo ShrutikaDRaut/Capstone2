@@ -1,0 +1,105 @@
+version: "3.0"
+
+stories:
+
+# Main story lines #
+  - story: initiate_Chat_Offer
+    steps:
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_made_offer
+         entities:
+         - user_offer: 500
+       - slot_was_set:
+         - user_offer: 500
+       - action: utter_counter_offer
+
+
+  - story: initiate_Chat_Random
+    steps:
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_random
+       - action: utter_ask_new_offer
+       - intent: user_made_offer
+         entities:
+         - user_offer: 500
+       - slot_was_set:
+         - user_offer: 500
+       - action: utter_counter_offer
+
+  - story: initiate_Chat_End
+    steps:
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_end
+       - action: utter_thankyou
+
+# Branches #
+
+  - story: chat_Offer_Accepted
+    steps:
+       - action: utter_counter_offer
+       - intent: user_offer_accepted
+       - action: utter_congrats
+
+  - story: chat_Offer_Denied
+    steps:
+       - action: utter_counter_offer
+       - intent: user_offer_denied
+       - action: utter_ask_new_offer
+  
+  - story: chat_Offer_End
+    steps:
+       - action: utter_counter_offer
+       - intent: user_end
+       - action: utter_ask_new_offer
+
+  - story: chat_Offer_Random
+    steps:
+       - action: utter_counter_offer
+       - intent: user_random
+       - action: utter_ask_new_offer
+
+  - story: chat_Offer_Accepted_New
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_offer_accepted
+       - action: utter_ask_new_offer
+
+  - story: chat_Offer_Accepted_Begin
+    steps:
+       - action: utter_chat_begin
+       - intent: user_offer_accepted
+       - action: utter_ask_new_offer
+
+  - story: chat_Random_Random
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_random
+       - action: utter_ask_new_offer
+  
+  - story: chat_Random_End
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_end
+       - action: utter_thankyou
+  
