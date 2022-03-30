@@ -45,8 +45,11 @@ def product_detail(request, product_id: int):
     items = cookieData['items']
 
     if len(items) != 0:
-        cartQuantity = [item for item in items if item['id']
-                        == product_id][0]['quantity']
+        for item in items:
+            if item['id'] == product_id:
+                cartQuantity = item['quantity']
+            else:
+                cartQuantity = 1
     else:
         cartQuantity = 1
 

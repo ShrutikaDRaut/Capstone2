@@ -16,7 +16,7 @@ body {
 .wrapper {
   min-height: 100%;
   height: auto !important;
-  margin: 0 auto -40px; /* the bottom margin is the negative value of the footer's height */
+  margin: 0 auto -90px; /* the bottom margin is the negative value of the footer's height */
 }
 
 .navbar {
