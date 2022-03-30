@@ -5,6 +5,7 @@ A web-based software powered with AI that allows customer to browse the gadgets
 ## Technologies
 * Python
 * HTML/CSS
+* Javascript
 * Django
 * Rasa
 * SQLite
