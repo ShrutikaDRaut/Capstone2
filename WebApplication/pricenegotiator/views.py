@@ -44,15 +44,14 @@ def product_detail(request, product_id: int):
     cartItems = cookieData['cartItems']
     items = cookieData['items']
 
+    cartQuantity = 1
     if len(items) != 0:
         for item in items:
             if item['id'] == product_id:
                 cartQuantity = item['quantity']
-            else:
-                cartQuantity = 1
     else:
         cartQuantity = 1
-
+    print(cartQuantity)
     context = {'product': product,
                'productDetail': productdetail, 'cartItems': cartItems, 'cartQuantity': cartQuantity}
     return render(request, 'product.html', context)
@@ -113,3 +112,11 @@ def processOrder(request):
     )
 
     return JsonResponse('Payment completed!', safe=False)
+
+
+def orderCompleted(request):
+    cookieData = cookieCart(request)
+    cartItems = cookieData['cartItems']
+
+    context = {'cartItems': cartItems}
+    return render(request, 'thankyou.html', context)

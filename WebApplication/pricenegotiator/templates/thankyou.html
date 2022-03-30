@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-4">
+        <h1>Thank You!</h1>
+        <h1>Your Order has been confirmed.</h1>
+        <p>You will be recieving a confirmation email with order details.</p>
+        <a href="" class="btn"> Continue Shopping &#8594;</a>
+    </div>
+    <div class="col-4">
+        <img src="{% static 'images/tick.png' %}">
+    </div>
+</div>
+{% endblock %}
