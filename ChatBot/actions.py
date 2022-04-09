@@ -10,28 +10,27 @@ from rasa_sdk.knowledge_base.actions import ActionQueryKnowledgeBase
 
 from bargain_logic import bargainAmt
 
+# class ActionCheckExistence(Action):
+#     knowledge = Path("data/pokemon_name.txt").read_text().split("\n")
 
-class ActionCheckExistence(Action):
-    knowledge = Path("data/pokemon_name.txt").read_text().split("\n")
+#     def name(self) -> Text:
+#         return "action_check_existence"
 
-    def name(self) -> Text:
-        return "action_check_existence"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print(domain["slots"]["min_price"])
-        for blob in tracker.latest_message['entities']:
-            # print(tracker.latest_message)
-            if blob['entity'] == 'pokemon_name':
-                name = blob['value']
-                if name in self.knowledge:
-                    dispatcher.utter_message(text=f"Yes, {name} is a pokemon.")
-                else:
-                    dispatcher.utter_message(
-                        text=
-                        f"I do not recognize {name}, are you sure it is correctly spelled?"
-                    )
-        return []
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         print(domain["slots"]["min_price"])
+#         for blob in tracker.latest_message['entities']:
+#             # print(tracker.latest_message)
+#             if blob['entity'] == 'pokemon_name':
+#                 name = blob['value']
+#                 if name in self.knowledge:
+#                     dispatcher.utter_message(text=f"Yes, {name} is a pokemon.")
+#                 else:
+#                     dispatcher.utter_message(
+#                         text=
+#                         f"I do not recognize {name}, are you sure it is correctly spelled?"
+#                     )
+#         return []
 
 
 class ActionNegotiate(Action):
@@ -77,7 +76,7 @@ class ActionDealAcceptReject(Action):
         return []
 
 
-class MyKnowledgeBaseAction(ActionQueryKnowledgeBase):
-    def __init__(self):
-        knowledge_base = InMemoryKnowledgeBase("data/pokemondb.json")
-        super().__init__(knowledge_base)
+# class MyKnowledgeBaseAction(ActionQueryKnowledgeBase):
+#     def __init__(self):
+#         knowledge_base = InMemoryKnowledgeBase("data/pokemondb.json")
+#         super().__init__(knowledge_base)

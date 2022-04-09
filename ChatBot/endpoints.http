@@ -1,0 +1,36 @@
+
+POST http://0.0.0.0:5005/webhooks/rest/webhook
+Content-Type:  Application/JSON
+
+{
+  "sender": "test_user2",  
+  "message": "1570"
+}
+
+###
+
+GET http://localhost:5005/conversations/test_user2/tracker
+
+###
+POST http://localhost:5005/conversations/test_user2/tracker/events
+Content-Type:  Application/JSON
+
+[{
+  "event":"slot",  
+  "name": "min_price", 
+"value": "1200"
+},{
+  "event":"slot",  
+  "name": "max_price", 
+"value": "1800"
+} ]
+
+
+###
+POST http://0.0.0.0:5005/webhooks/rest/webhook
+Content-Type:  Application/JSON
+
+{
+  "sender": "test_user2",  
+  "message": "Y"
+}
