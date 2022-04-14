@@ -1,4 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block banner %}
+<div class="row">
+    <div class="col-2">
+        <h1>Buy Electronics <br> At One Stop!</h1>
+        <p>Here, you can buy every electronics at reasonable price and negotiate with bot.</p>
+        <a href="" class="btn">Explore Now &#8594;</a>
+    </div>
+    <div class="col-2">
+        <img src="{% static 'images/wallpaper2.jpg' %}">
+    </div>
+</div>
+{% endblock %}
 {% block content %}
 <div class="small-container">
     <h2 class="title">All Products</h2>
@@ -6,8 +19,8 @@
     {% for product in products %}
         <div class="col-3">
             <img src="{{ product.product_Img_url }}" alt="Product photo">
-            <h4><a href="">{{ product.product_Name }}</a></h4>
-            <p>$ {{ product.display_Price }}</p>
+            <h4><a href="{% url 'product_detail' product.product_Id %}">{{ product.product_Name }}</a></h4>
+            <p class="display-price">$ {{ product.display_Price }}</p>
         </div>
     {% endfor %}
     </div>
