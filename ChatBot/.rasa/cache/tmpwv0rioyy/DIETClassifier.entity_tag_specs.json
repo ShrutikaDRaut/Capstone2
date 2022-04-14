@@ -1,0 +1,44 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-accept_offer",
+      "2": "I-accept_offer",
+      "3": "L-accept_offer",
+      "4": "U-accept_offer",
+      "5": "B-max_price",
+      "6": "I-max_price",
+      "7": "L-max_price",
+      "8": "U-max_price",
+      "9": "B-min_price",
+      "10": "I-min_price",
+      "11": "L-min_price",
+      "12": "U-min_price",
+      "13": "B-user_offer",
+      "14": "I-user_offer",
+      "15": "L-user_offer",
+      "16": "U-user_offer",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-accept_offer": 1,
+      "I-accept_offer": 2,
+      "L-accept_offer": 3,
+      "U-accept_offer": 4,
+      "B-max_price": 5,
+      "I-max_price": 6,
+      "L-max_price": 7,
+      "U-max_price": 8,
+      "B-min_price": 9,
+      "I-min_price": 10,
+      "L-min_price": 11,
+      "U-min_price": 12,
+      "B-user_offer": 13,
+      "I-user_offer": 14,
+      "L-user_offer": 15,
+      "U-user_offer": 16,
+      "O": 0
+    },
+    "num_tags": 17
+  }
+]
