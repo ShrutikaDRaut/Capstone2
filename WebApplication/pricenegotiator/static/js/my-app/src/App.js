@@ -1,9 +1,10 @@
-import { addResponseMessage, Widget } from "react-chat-widget";
-import "./styles.css";
-import "react-chat-widget/lib/styles.css";
 import React, { useEffect, useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
+import "react-chat-widget/lib/styles.css";
+import { addResponseMessage, Widget } from "react-chat-widget";
+import "./styles.css";
+import { sendMessage, setSlots } from "./utils";
 
 export default function App() {
   const [convId, setConvId] = useState("");
@@ -15,12 +16,17 @@ export default function App() {
     );
   }, []);
 
-  const handleNewUserMessage = (newMessage) => {
+  const handleNewUserMessage = async (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
+    const botResponse = await sendMessage(newMessage, convId);
+    botResponse.forEach((el) => {
+      addResponseMessage(el.text);
+    });
   };
 
-  const handleToggle = (status) => {
+  const handleToggle = async (status) => {
     console.log("widget status", status);
+    if (status) await setSlots(convId, 1200, 1800);
   };
   return (
     <div className="App">
