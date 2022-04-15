@@ -1,6 +1,7 @@
 import { Widget } from "react-chat-widget";
 import "./styles.css";
 import "react-chat-widget/lib/styles.css";
+import React from "react";
 
 export default function App() {
   const handleNewUserMessage = (newMessage) => {
