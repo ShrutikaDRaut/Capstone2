@@ -1,95 +1,105 @@
 version: "3.0"
 
 stories:
-  - story: sad path 1
-    steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: mood_unhappy
-    - action: utter_cheer_up
-    - action: utter_did_that_help
-    - intent: affirm
-    - action: utter_happy
 
-  - story: sad path 2
+# Main story lines #
+  - story: initiate_Chat_Offer
     steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: mood_unhappy
-    - action: utter_cheer_up
-    - action: utter_did_that_help
-    - intent: deny
-    - action: utter_goodbye
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_made_offer
+         entities:
+         - user_offer: 500
+       - slot_was_set:
+         - user_offer: 500
+       - action: utter_counter_offer
 
-  - story: say goodbye
+
+  - story: initiate_Chat_Random
     steps:
-     - intent: goodbye
-     - action: utter_goodbye
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_random
+       - action: utter_ask_new_offer
+       - intent: user_made_offer
+         entities:
+         - user_offer: 500
+       - slot_was_set:
+         - user_offer: 500
+       - action: utter_counter_offer
 
-  - story: bot challenge
+  - story: initiate_Chat_End
     steps:
-      - intent: bot_challenge
-      - action: utter_iamabot
+       - intent: user_initiate_chat
+         entities:
+         - min_price: 1000
+         - max_price: 3000
+       - slot_was_set:
+         - min_price: 1000
+         - max_price: 3000
+       - action: utter_chat_begin
+       - intent: user_end
+       - action: utter_thankyou
 
-  - story: bot challenge 2
+# Branches #
+
+  - story: chat_Offer_Accepted
     steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: bot_challenge
-      - action: utter_iamabot
-      - intent: demand_joke
-      - action: utter_joke
-      - intent: confirm_exists
-      - action: action_check_existence
+       - action: utter_counter_offer
+       - intent: user_offer_accepted
+       - action: utter_congrats
 
-  - story: bargain 1
+  - story: chat_Offer_Denied
     steps:
-      - intent: set_prices
-        entities:
-        - min_price: 290
-        - max_price: 700
-      - slot_was_set:
-        - min_price: 290
-        - max_price: 700
-      - action: utter_ask_initial_offer
-      - intent: user_counter_offer
-        entities:
-        - user_offer: 500
-      - slot_was_set:
-        - user_offer: 500
-      - action: action_counter_offer
-      - action: utter_ask_accept_offer
-      - intent: user_reply_offer
-        entities:
-        - accept_offer: Y
-      - action: action_reject_accept_offer
-
-  - story: bargain 2
+       - action: utter_counter_offer
+       - intent: user_offer_denied
+       - action: utter_ask_new_offer
+  
+  - story: chat_Offer_End
     steps:
-      - intent: set_prices
-        entities:
-        - min_price: 290
-        - max_price: 700
-      - slot_was_set:
-        - min_price: 290
-        - max_price: 700
-      - action: utter_ask_initial_offer
-      - intent: user_counter_offer
-        entities:
-        - user_offer: 500
-      - slot_was_set:
-        - user_offer: 500
-      - action: action_counter_offer
-      - action: utter_ask_accept_offer
-      - intent: user_reply_offer
-        entities:
-        - accept_offer: N
-      - action: action_reject_accept_offer
-      - intent: user_counter_offer
-        entities:
-        - user_offer: 500
-      - slot_was_set:
-        - user_offer: 500
-      - action: action_counter_offer
-      - action: utter_ask_accept_offer
+       - action: utter_counter_offer
+       - intent: user_end
+       - action: utter_ask_new_offer
 
+  - story: chat_Offer_Random
+    steps:
+       - action: utter_counter_offer
+       - intent: user_random
+       - action: utter_ask_new_offer
+
+  - story: chat_Offer_Accepted_New
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_offer_accepted
+       - action: utter_ask_new_offer
+
+  - story: chat_Offer_Accepted_Begin
+    steps:
+       - action: utter_chat_begin
+       - intent: user_offer_accepted
+       - action: utter_ask_new_offer
+
+  - story: chat_Random_Random
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_random
+       - action: utter_ask_new_offer
+  
+  - story: chat_Random_End
+    steps:
+       - action: utter_ask_new_offer
+       - intent: user_end
+       - action: utter_thankyou
+  
