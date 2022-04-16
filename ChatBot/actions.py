@@ -17,6 +17,7 @@ class ActionNegotiate(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print(tracker)
         min_price, max_price = float(tracker.get_slot("min_price")), float(
             tracker.get_slot("max_price"))
         for each in tracker.latest_message["entities"]:

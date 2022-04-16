@@ -7,7 +7,9 @@ module.exports = {
   mode: "development",
   entry: path.join(__dirname, "src", "index.js"),
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve("../"),
+    filename: "chatbot.js",
+    // publicPath: "/public/",
   },
   module: {
     rules: [

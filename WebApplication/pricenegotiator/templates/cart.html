@@ -1,60 +1,88 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="small-container cart-page">
-    <div class="wrapper">
-        <div class="webchat">
-            <div id="rasa-chat-widget" data-websocket-url="https://your-rasa-url-here/"></div>
-            <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
-        </div>
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            {% for item in items %}
-            <tr>
-                <td>
-                    <div class="cart-info align-items-center">
-                        <img src={{item.product.imageURL}} alt="Product img">
-                        <div>
-                            <a class="d-block mb-2" href="{% url 'product_detail' item.id %}">{{item.product.name}}</a>
-                            <small>${{item.product.price}}</small>
-                            <br>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <img src="{% static 'images/minus.png' %}" class="chg-btn-icon update-cart" data-product="{{item.id}}" data-action="remove" />
-                    <p id="quantity-{{item.id}}" class="d-inline-block mx-2 mb-0">{{item.quantity}}</p>
-                    <img src="{% static 'images/add.png' %}" class="chg-btn-icon update-cart" data-product="{{item.id}}" data-action="edit"/>
-                </td>
-                <td>${{item.get_total|floatformat:2}}</td>  
-            </tr>
-            {% endfor %}
-            {% if items|length == 0 %}
-                <tr>
-                    <td>
-                        You have no items to checkout!! Please continue shopping.
-                    </td>
-                </tr>
-            {% endif %}
-        </table>
-        <div class="divider"></div>
-        <div class="d-flex order-total justify-content-end">
-            <div class="order-items px-3">
-                <span>Items: </span>
-                <span class="fw-bold">{{order.get_cart_items}}</span>
-            </div>
-            <div class="order-subtotal">
-                <span>Subtotal: </span>
-                <span class="fw-bold">${{order.get_cart_total|floatformat:2}}</span>
-            </div>
-        </div>
-        {% if items|length != 0 %}
-            <div class="d-flex justify-content-end"><a class="btn" href="{% url 'checkout' %}">Checkout</a></div>
-        {% endif %}
+  <div class="wrapper">
+    <div class="webchat">
+      <div
+        id="rasa-chat-widget"
+        data-websocket-url="https://your-rasa-url-here/"
+      ></div>
+      <script
+        src="https://unpkg.com/@rasahq/rasa-chat"
+        type="application/javascript"
+      ></script>
     </div>
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+      {% for item in items %}
+      <tr>
+        <td>
+          <div class="cart-info align-items-center">
+            <img src="{{item.product.imageURL}}" alt="Product img" />
+            <div>
+              <a class="d-block mb-2" href="{% url 'product_detail' item.id %}"
+                >{{item.product.name}}</a
+              >
+              <small>${{item.product.price}}</small>
+              <br />
+            </div>
+          </div>
+        </td>
+        <td>
+          <img
+            src="{% static 'images/minus.png' %}"
+            class="chg-btn-icon update-cart"
+            data-product="{{item.id}}"
+            data-action="remove"
+          />
+          <p id="quantity-{{item.id}}" class="d-inline-block mx-2 mb-0">
+            {{item.quantity}}
+          </p>
+          <img
+            src="{% static 'images/add.png' %}"
+            class="chg-btn-icon update-cart"
+            data-product="{{item.id}}"
+            data-action="edit"
+          />
+        </td>
+        <td>${{item.get_total|floatformat:2}}</td>
+      </tr>
+      {% endfor %} {% if items|length == 0 %}
+      <tr>
+        <td>You have no items to checkout!! Please continue shopping.</td>
+      </tr>
+      {% endif %}
+    </table>
+    <div class="divider"></div>
+    <div class="d-flex order-total justify-content-end">
+      <div class="order-items px-3">
+        <span>Items: </span>
+        <span class="fw-bold">{{order.get_cart_items}}</span>
+      </div>
+      <div class="order-subtotal">
+        <span>Subtotal: </span>
+        <span class="fw-bold" id="total"
+          >${{order.get_cart_total|floatformat:2}}</span
+        >
+      </div>
+    </div>
+    {% if items|length != 0 %}
+    <div class="d-flex justify-content-end">
+      <a class="btn" href="{% url 'checkout' %}">Checkout</a>
+    </div>
+    {% endif %}
+  </div>
 </div>
+{{ wholeCart|json_script:'cartDetails' }}
+<div id="root"></div>
+<script type="text/javascript" src="{% static 'js/chatbot.js' %}"></script>
+<script>
+  localStorage.setItem(
+    "orderDetails",
+    document.getElementById("cartDetails").textContent
+  );
+</script>
 {% endblock %}

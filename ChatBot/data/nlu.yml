@@ -85,12 +85,12 @@
       - oke, make me laugh one more time
       - make me laugh
 
-  - intent: set_prices
-    examples: |
-      - prices: [199.00](min_price) [399.00](max_price)
-      - prices: [1000](min_price) [10000](max_price)
-      - prices: [800](min_price) [2000](max_price)
-      - prices: [1500](min_price) [4500](max_price)
+  # - intent: set_prices
+  #   examples: |
+  #     - prices: [199.00](min_price) [399.00](max_price)
+  #     - prices: [1000](min_price) [10000](max_price)
+  #     - prices: [800](min_price) [2000](max_price)
+  #     - prices: [1500](min_price) [4500](max_price)
     
   - intent: user_counter_offer
     examples: |

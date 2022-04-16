@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import { v4 as uuidv4 } from "uuid";
 import "react-chat-widget/lib/styles.css";
 import { addResponseMessage, Widget } from "react-chat-widget";
 import "./styles.css";
@@ -8,16 +6,18 @@ import { sendMessage, setSlots } from "./utils";
 
 export default function App() {
   const [convId, setConvId] = useState("");
+  const [orderDetails, setOrderDetails] = useState();
 
   useEffect(() => {
-    setConvId(uuidv4());
+    const store = JSON.parse(localStorage.getItem("orderDetails"));
+    setOrderDetails(store);
+    setConvId("anon");
     addResponseMessage(
-      "Hey there 😁, your basket price is {placeholder}. What is your best offer?"
+      `Hey there 😁, your basket price is $${store.order.get_cart_total}. What is your best offer?`
     );
   }, []);
 
   const handleNewUserMessage = async (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
     const botResponse = await sendMessage(newMessage, convId);
     botResponse.forEach((el) => {
       addResponseMessage(el.text);
@@ -25,8 +25,12 @@ export default function App() {
   };
 
   const handleToggle = async (status) => {
-    console.log("widget status", status);
-    if (status) await setSlots(convId, 1200, 1800);
+    if (status)
+      await setSlots(
+        convId,
+        orderDetails.min_price,
+        orderDetails.order.get_cart_total
+      );
   };
   return (
     <div className="App">

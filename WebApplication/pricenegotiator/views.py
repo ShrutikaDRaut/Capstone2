@@ -38,7 +38,8 @@ def home(request):
 def product_detail(request, product_id: int):
     product = Product.objects.get(product_Id=product_id)
     productdetail = json.loads(
-        '"'+product.product_Detail.replace("'", " ").replace(" ,", ",")+'"')
+        '"' + product.product_Detail.replace("'", " ").replace(" ,", ",") +
+        '"')
 
     cookieData = cookieCart(request)
     cartItems = cookieData['cartItems']
@@ -52,8 +53,12 @@ def product_detail(request, product_id: int):
     else:
         cartQuantity = 1
     print(cartQuantity)
-    context = {'product': product,
-               'productDetail': productdetail, 'cartItems': cartItems, 'cartQuantity': cartQuantity}
+    context = {
+        'product': product,
+        'productDetail': productdetail,
+        'cartItems': cartItems,
+        'cartQuantity': cartQuantity
+    }
     return render(request, 'product.html', context)
 
 
@@ -63,7 +68,12 @@ def cart(request):
     items = cookieData['items']
     order = cookieData['order']
 
-    context = {'cartItems': cartItems, 'items': items, 'order': order}
+    context = {
+        'cartItems': cartItems,
+        'items': items,
+        'order': order,
+        "wholeCart": cookieData
+    }
     return render(request, 'cart.html', context)
 
 
@@ -74,15 +84,21 @@ def checkout(request):
     order = cookieData['order']
     items = cookieData['items']
 
-    tax = order['get_cart_total']*0.13
-    total = order['get_cart_total'] + order['get_cart_total']*0.13 - 120.00 + 5
-    priceValues = {'subtotal': order['get_cart_total'],
-                   'tax': f'{tax:.2f}',
-                   'discount': 120.00,
-                   'total':  f'{total:.2f}'
-                   }
-    context = {'items': items, 'order': order,
-               'cartItems': cartItems, 'priceValues': priceValues}
+    tax = order['get_cart_total'] * 0.13
+    total = order[
+        'get_cart_total'] + order['get_cart_total'] * 0.13 - 120.00 + 5
+    priceValues = {
+        'subtotal': order['get_cart_total'],
+        'tax': f'{tax:.2f}',
+        'discount': 120.00,
+        'total': f'{total:.2f}'
+    }
+    context = {
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'priceValues': priceValues
+    }
     return render(request, 'checkout.html', context)
 
 
