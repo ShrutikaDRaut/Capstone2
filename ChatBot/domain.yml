@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.1"
 
 actions:
 #- utter_ask_approval
@@ -7,6 +7,8 @@ actions:
 - utter_counter_offer
 - utter_congrats
 - utter_thankyou
+- action_counter_offer
+- action_reject_accept_offer
 entities:
 - attribute
 - mention
@@ -18,18 +20,13 @@ intents:
 - user_made_offer
 - user_offer_accepted
 - user_offer_denied
-- user_initiate_chat
 - user_end
 - user_random
 responses:
-  #utter_ask_approval:
-  #- text: Does our offer work for you? (Y/N)
+  utter_ask_approval:
+  - text: Does our offer work for you? (Y/N)
   utter_ask_new_offer:
   - text: Shoot me a new offer!
-  utter_chat_begin:
-  - text: Hey! Do you want to make an offer? Hit me a number to bargain. 
-  utter_counter_offer:
-  - text: Hey! we would like to offer you at 150$ less price. Does our offer work for you?
   utter_congrats:
   - text: Congratulations! You can go to check out page for final purchase.
   utter_thankyou:

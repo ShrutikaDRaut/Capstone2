@@ -1,46 +1,31 @@
- version: "3.0"
+ version: "3.1"
  
  nlu:
-  - intent: user_initiate_chat
-    examples: |
-      - prices: [199.00](min_price) [399.00](max_price)
-      - prices: [1000](min_price) [10000](max_price)
-      - prices: [800](min_price) [2000](max_price)
-      - prices: [1500](min_price) [4500](max_price)
+
 
   - intent: user_made_offer
     examples: |
       - [400](user_offer)
-      - [100.02]
-      - [1000] 
-      - [1000] Dollar
+      - [100.02](user_offer)
+      - [1000](user_offer) 
+      - [1000](user_offer) Dollar
+      - $[400](user_offer)
+      - [600](user_offer) bucks
+      - djdjd
+      - oik
 
   - intent: user_offer_accepted
     examples: |
+      - Y
       - yes
-      - ok confirmed
-      - done
-      - ok done
-      - accepted
-      - ready
-      - fine
-      - deal
-      - agree
-      - final
-      - interested
+      - ok
+      
 
   - intent: user_offer_denied
     examples: |
       - no
-      - never
-      - deny
-      - reject
-      - not interested
-      - not agree
-      - try again
-      - later
-      - try
-
+      - N
+    
 
   - intent: user_end
     examples: |
@@ -52,6 +37,6 @@
       - end
       - over
 
-  - intent: user_random
-    examples: |
-      - this is random chat
+  # - intent: user_random
+  #   examples: |
+  #     - this is random chat

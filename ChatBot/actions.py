@@ -17,39 +17,40 @@ class ActionNegotiate(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print(tracker)
         min_price, max_price = float(tracker.get_slot("min_price")), float(
             tracker.get_slot("max_price"))
         for each in tracker.latest_message["entities"]:
             if each["entity"] == "user_offer":
                 user_offer = float(each["value"])
-                print(min_price)
-                print(user_offer)
                 counter_offer = bargainAmt(min_price, max_price, user_offer)
                 dispatcher.utter_message(
                     text=f"Here is our counter-offer: {counter_offer}")
+            #     return []
+            # else:
+            #     dispatcher.utter_message(
+            #         text=f"Please enter a valid value")
         return []
 
 
-class ActionDealAcceptReject(Action):
-    def name(self) -> str:
-        return "action_reject_accept_offer"
+# class ActionDealAcceptReject(Action):
+#     def name(self) -> str:
+#         return "action_reject_accept_offer"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # Do magic stuff after user accepts offer
-        for each in tracker.latest_message["entities"]:
-            if each["entity"] == "accept_offer":
-                accept_offer = each["value"]
-                if accept_offer == "Y":
-                    dispatcher.utter_message(
-                        text=
-                        "Thank you for your business, we will now update the basket"
-                    )
-                else:
-                    dispatcher.utter_message(
-                        text=
-                        "Ok, please provide a counter_offer to our offer above."
-                    )
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         # Do magic stuff after user accepts offer
+#         for each in tracker.latest_message["entities"]:
+#             if each["entity"] == "accept_offer":
+#                 accept_offer = each["value"]
+#                 if accept_offer == "Y":
+#                     dispatcher.utter_message(
+#                         text=
+#                         "Thank you for your business, we will now update the basket"
+#                     )
+#                 else:
+#                     dispatcher.utter_message(
+#                         text=
+#                         "Ok, please provide a counter_offer to our offer above."
+#                     )
 
-        return []
+#         return []
