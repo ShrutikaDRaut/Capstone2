@@ -108,20 +108,18 @@
  
     window.onload = () => {
         const initialPrice = parseFloat(document.getElementById("subtotal").textContent.replace("$", ""), 2)
-    const discountPrice = parseFloat(localStorage.getItem("finalOffer"))
-    const discount = initialPrice - discountPrice
+        const discountPrice = parseFloat(localStorage.getItem("finalOffer") ? localStorage.getItem("finalOffer") : initialPrice)
+        const discount = initialPrice - discountPrice
 
-    const taxAmount = 0.13 * discountPrice
-    const shippingFee = 5.00
+        const taxAmount = 0.13 * discountPrice
+        const shippingFee = 5.00
 
-    const total = discountPrice + taxAmount + shippingFee
+        const total = discountPrice + taxAmount + shippingFee
 
-    console.log(initialPrice)
-
-    document.getElementById("subtotal").textContent = "$" + initialPrice.toFixed(2)
-    document.getElementById("tax").textContent = "$" + taxAmount.toFixed(2)
-    document.getElementById("total").textContent = "$" + total.toFixed(2)
-    document.getElementById("discount").textContent = "$" + discount.toFixed(2)
+        document.getElementById("subtotal").textContent = "$" + initialPrice.toFixed(2)
+        document.getElementById("tax").textContent = "$" + taxAmount.toFixed(2)
+        document.getElementById("total").textContent = "$" + total.toFixed(2)
+        document.getElementById("discount").textContent = "$" + discount.toFixed(2)
         
     }
 
