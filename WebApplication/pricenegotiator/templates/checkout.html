@@ -23,19 +23,19 @@
                     <div id="shipping-info">      
                         <h4 class="mb-2 mt-3">Shipping Information:</h4>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="address" placeholder="Address">
+                            <input class="form-control" type="text" name="address" placeholder="Address" required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="city" placeholder="City">
+                            <input class="form-control" type="text" name="city" placeholder="City" required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="state" placeholder="State">
+                            <input class="form-control" type="text" name="state" placeholder="State" required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="country" placeholder="Country">
+                            <input class="form-control" type="text" name="country" placeholder="Country" required>
                         </div>
                         <div class="form-field">
-                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code">
+                            <input class="form-control" type="text" name="zipcode" placeholder="Zip code" required>
                         </div>
                     </div>
                     <hr>
@@ -153,23 +153,30 @@
 			}
 
 	    	var url = "/process_order/"
-	    	fetch(url, {
-	    		method:'POST',
-	    		headers:{
-	    			'Content-Type':'applicaiton/json',
-	    			'X-CSRFToken':csrftoken,
-	    		}, 
-	    		body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
-	    		
-	    	})
-	    	.then((response) => response.json())
-	    	.then((data) => {
-				alert('Transaction completed');  
-
-				cart = {}
-				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
-                window.location.href = "{% url 'order-completed' %}"
-            })
+            const validation = form.first_name.value !== '' && 
+                                form.last_name.value !== '' && 
+                                form.email.value !== '' &&
+                                form.address.value !== '' &&
+                                form.city.value !== '' &&
+                                form.country.value !== '' &&
+                                form.zipcode.value !== ''
+            if(validation)
+            {
+                fetch(url, {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'applicaiton/json',
+                        'X-CSRFToken':csrftoken,
+                    }, 
+                    body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    cart = {}
+                    document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+                    window.location.href = "{% url 'order-completed' %}"
+                })
+            }
 	    }
 </script>
 

@@ -313,3 +313,17 @@ td img {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* chat widget */
+.rcw-launcher {
+  box-shadow: 0 2px 10px 1px #ffd6d6 !important;
+}
+.rcw-header, .rcw-client .rcw-message-text, .rcw-launcher {
+  background-color: #ff523b !important;
+}
+.rcw-client .rcw-message-text p {
+  color: #fff;
+}
+.rcw-response .rcw-message-text {
+  background-color: #ffd6d6 !important;
+}

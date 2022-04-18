@@ -7,6 +7,8 @@ from pathlib import Path
 from .models import *
 from .utils import cookieCart, guestOrder
 from django.http import JsonResponse
+from django.core.mail import send_mail
+from django.conf import settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -116,6 +118,13 @@ def processOrder(request):
     order.order_final_price = total
     order.complete = True
     order.save()
+
+    send_mail(
+        subject=f'GadgetBot order confirmation {transaction_id}',
+        message=f'Your order with order id {transaction_id} has been received.',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[data['form']['email']]
+    )
 
     ShippingAddress.objects.create(
         customer=customer,

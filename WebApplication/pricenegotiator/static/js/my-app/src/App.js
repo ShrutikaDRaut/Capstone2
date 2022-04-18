@@ -47,7 +47,7 @@ export default function App() {
       <Widget
         handleNewUserMessage={handleNewUserMessage}
         handleToggle={handleToggle}
-        title="GagdetBot"
+        title="GadgetBot"
         subtitle="Let's deal"
       />
     </div>
