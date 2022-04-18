@@ -7,6 +7,7 @@ import { sendMessage, setSlots } from "./utils";
 export default function App() {
   const [convId, setConvId] = useState("");
   const [orderDetails, setOrderDetails] = useState();
+  const [offer, setOffer] = useState();
 
   useEffect(() => {
     const store = JSON.parse(localStorage.getItem("orderDetails"));
@@ -19,6 +20,15 @@ export default function App() {
 
   const handleNewUserMessage = async (newMessage) => {
     const botResponse = await sendMessage(newMessage, convId);
+    const regex = /\$([0-9.]+)\./;
+    const match = botResponse[0].text.match(regex);
+    match?.length === 2 && setOffer(match[1]);
+    if (botResponse[0].text.match("Congratulations!")) {
+      localStorage.setItem("finalOffer", offer);
+      setTimeout(() => {
+        window.location = "checkout";
+      }, 3000);
+    }
     botResponse.forEach((el) => {
       addResponseMessage(el.text);
     });

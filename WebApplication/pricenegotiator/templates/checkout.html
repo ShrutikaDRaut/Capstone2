@@ -59,23 +59,7 @@
                                     <div class="text-left"> <span class="text-muted">Subtotal</span> </div>
                                 </td>
                                 <td>
-                                    <div class="text-right"> <span>${{priceValues.subtotal|floatformat:2}}</span> </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="text-left"> <span class="text-muted">Shipping Fee</span> </div>
-                                </td>
-                                <td>
-                                    <div class="text-right"> <span>$5</span> </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="text-left"> <span class="text-muted">Tax Fee</span> </div>
-                                </td>
-                                <td>
-                                    <div class="text-right"> <span>${{priceValues.tax}}</span> </div>
+                                    <div class="text-right"> <span id="subtotal">${{priceValues.subtotal|floatformat:2}}</span> </div>
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +67,23 @@
                                     <div class="text-left"> <span class="text-muted">Discount</span> </div>
                                 </td>
                                 <td>
-                                    <div class="text-right"> <span class="text-success">${{priceValues.discount}}</span> </div>
+                                    <div class="text-right"> <span class="text-success" id="discount">${{priceValues.discount}}</span> </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="text-left"> <span class="text-muted">Shipping Fee</span> </div>
+                                </td>
+                                <td>
+                                    <div class="text-right"> <span>$5.00</span> </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="text-left"> <span class="text-muted">Tax Fee</span> </div>
+                                </td>
+                                <td>
+                                    <div class="text-right"> <span id="tax">${{priceValues.tax}}</span> </div>
                                 </td>
                             </tr>
                             <tr class="border-top border-bottom">
@@ -91,7 +91,7 @@
                                     <div class="text-left"> <span class="font-weight-bold">Total</span> </div>
                                 </td>
                                 <td>
-                                    <div class="text-right"> <span class="font-weight-bold">${{priceValues.total}}</span> </div>
+                                    <div class="text-right"> <span class="font-weight-bold" id="total">${{priceValues.total}}</span> </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -102,9 +102,28 @@
         </div>
     </div>
 </div>
+{{ priceValues.subtotal|floatformat:2|json_script:'subtotal' }}
 <script type="text/javascript">
-    var subtotal = '{{order.get_cart_total|floatformat:2}}'
-    var total = '{{priceValues.total}}'
+
+ 
+    window.onload = () => {
+        const initialPrice = parseFloat(document.getElementById("subtotal").textContent.replace("$", ""), 2)
+    const discountPrice = parseFloat(localStorage.getItem("finalOffer"))
+    const discount = initialPrice - discountPrice
+
+    const taxAmount = 0.13 * discountPrice
+    const shippingFee = 5.00
+
+    const total = discountPrice + taxAmount + shippingFee
+
+    console.log(initialPrice)
+
+    document.getElementById("subtotal").textContent = "$" + initialPrice.toFixed(2)
+    document.getElementById("tax").textContent = "$" + taxAmount.toFixed(2)
+    document.getElementById("total").textContent = "$" + total.toFixed(2)
+    document.getElementById("discount").textContent = "$" + discount.toFixed(2)
+        
+    }
 
     var form = document.getElementById('form')
     form.addEventListener('submit', function(e){

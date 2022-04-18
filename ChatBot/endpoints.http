@@ -1,4 +1,12 @@
+POST http://localhost:5005/webhooks/rest/webhook
+Content-Type:  application/json
 
+{
+  "amount": "1500",  
+  
+}
+
+###
 POST http://localhost:5005/webhooks/rest/webhook
 Content-Type:  application/json
 

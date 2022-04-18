@@ -9,10 +9,9 @@
       - [100.02](user_offer)
       - [1000](user_offer) 
       - [1000](user_offer) Dollar
-      - $[400](user_offer)
+      - $ [400](user_offer)
       - [600](user_offer) bucks
-      - djdjd
-      - oik
+
 
   - intent: user_offer_accepted
     examples: |
@@ -37,6 +36,8 @@
       - end
       - over
 
-  # - intent: user_random
-  #   examples: |
-  #     - this is random chat
+  - intent: user_random
+    examples: |
+      - this is random chat
+      - JDJDKD
+      - UDIDID

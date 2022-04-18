@@ -24,11 +24,12 @@ class ActionNegotiate(Action):
                 user_offer = float(each["value"])
                 counter_offer = bargainAmt(min_price, max_price, user_offer)
                 dispatcher.utter_message(
-                    text=f"Here is our counter-offer: {counter_offer}")
-            #     return []
-            # else:
-            #     dispatcher.utter_message(
-            #         text=f"Please enter a valid value")
+                    text=
+                    f"Here is our counter-offer: ${counter_offer}.\n\n Does our offer work for you? (Y/N)"
+                )
+                # return []
+        #     else:
+        #         dispatcher.utter_message(text=f"Please enter a valid value")
         return []
 
 

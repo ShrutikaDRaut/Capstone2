@@ -11,7 +11,14 @@ stories:
        - slot_was_set:
          - user_offer: 500
        - action: action_counter_offer
-       - action: utter_ask_approval
+       - intent: user_offer_accepted
+       - action: utter_congrats
+
+  - story: chat_Offer_Denied
+    steps:
+       - action: action_counter_offer
+       - intent: user_offer_denied
+       - action: utter_ask_new_offer
 
 
   - story: initiate_Chat_Random
@@ -24,6 +31,8 @@ stories:
        - slot_was_set:
          - user_offer: 500
        - action: action_counter_offer
+       - intent: user_offer_accepted
+       - action: utter_congrats
 
   - story: initiate_Chat_End
     steps:
@@ -32,17 +41,9 @@ stories:
 
 # Branches #
 
-  - story: chat_Offer_Accepted
-    steps:
-       - action: action_counter_offer
-       - intent: user_offer_accepted
-       - action: utter_congrats
 
-  - story: chat_Offer_Denied
-    steps:
-       - action: action_counter_offer
-       - intent: user_offer_denied
-       - action: utter_ask_new_offer
+
+
   
   - story: chat_Offer_End
     steps:
