@@ -1,4 +1,4 @@
-POST http://localhost:5005/webhooks/rest/webhook
+POST http://68.183.198.98:5005/webhooks/rest/webhook
 Content-Type:  application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type:  application/json
 }
 
 ###
-POST http://localhost:5005/webhooks/rest/webhook
+POST http://68.183.198.98:5005/webhooks/rest/webhook
 Content-Type:  Application/JSON
 
 {
@@ -25,10 +25,10 @@ Content-Type:  Application/JSON
 }
 
 ###
-GET http://localhost:5005/conversations/test_user2/tracker
+GET http://68.183.198.98:5005/conversations/test_user2/tracker
 
 ###
-POST http://localhost:5005/conversations/test_user2/tracker/events
+POST http://68.183.198.98:5005/conversations/test_user2/tracker/events
 Content-Type:  application/json
 
 [{

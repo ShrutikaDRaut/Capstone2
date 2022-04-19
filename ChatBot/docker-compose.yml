@@ -8,9 +8,12 @@ services:
       - ./:/app
     command:
     - run
+    - -m
+    - 20220416-232407-pallid-falloff.tar.gz
     - --enable-api
     - --cors
     - "*"
+
 
   rasa_actions:
     image: rasa/rasa:3.1.0-full
