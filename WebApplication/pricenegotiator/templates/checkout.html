@@ -105,16 +105,18 @@
 {{ priceValues.subtotal|floatformat:2|json_script:'subtotal' }}
 <script type="text/javascript">
 
- 
+    let total
+    let initialPrice
+
     window.onload = () => {
-        const initialPrice = parseFloat(document.getElementById("subtotal").textContent.replace("$", ""), 2)
+        initialPrice = parseFloat(document.getElementById("subtotal").textContent.replace("$", ""), 2)
         const discountPrice = parseFloat(localStorage.getItem("finalOffer") ? localStorage.getItem("finalOffer") : initialPrice)
         const discount = initialPrice - discountPrice
 
         const taxAmount = 0.13 * discountPrice
         const shippingFee = 5.00
 
-        const total = discountPrice + taxAmount + shippingFee
+        total = parseFloat((discountPrice + taxAmount + shippingFee).toFixed(2))
 
         document.getElementById("subtotal").textContent = "$" + initialPrice.toFixed(2)
         document.getElementById("tax").textContent = "$" + taxAmount.toFixed(2)
@@ -135,11 +137,11 @@
 
     function submitFormData(){
 	    	var userFormData = {
-				'first_name':form.first_name.value,
-				'last_name':form.last_name.value,
-				'email':form.email.value,
-				'total':total,
-                'subtotal': subtotal
+				'first_name': form.first_name.value,
+				'last_name': form.last_name.value,
+				'email': form.email.value,
+				'total': total,
+                'subtotal': initialPrice
 			}
 
 			var shippingInfo = {
