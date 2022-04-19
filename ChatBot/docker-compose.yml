@@ -9,6 +9,8 @@ services:
     command:
     - run
     - --enable-api
+    - --cors
+    - "*"
 
   rasa_actions:
     image: rasa/rasa:3.1.0-full
