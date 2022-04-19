@@ -1,0 +1,21 @@
+version: '3.0'
+services:
+  rasa:
+    image: rasa/rasa:3.1.0-full
+    ports:
+      - 5005:5005
+    volumes:
+      - ./:/app
+    command:
+    - run
+    - --enable-api
+
+  rasa_actions:
+    image: rasa/rasa:3.1.0-full
+    ports:
+      - 5055:5055
+    volumes:
+      - ./:/app
+    command:
+    - run 
+    - actions
